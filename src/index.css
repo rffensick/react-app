@@ -81,3 +81,23 @@ header {
   opacity: 0.01;
   transition: opacity 500ms ease-in;
 }
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+
+  .input-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+
+    input[name="user-input"] {
+      width: 300px;
+    }
+  }
+
+  button {
+    display: block;
+    width: 200px;
+  }
+}

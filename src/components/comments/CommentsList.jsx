@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Comment from "./Comments";
 import toggleOpen from "./../../decorators/toggleOpen";
+import CommentsForm from "./CommentsForm";
 
 class CommentsList extends Component {
 
@@ -24,6 +25,7 @@ class CommentsList extends Component {
 		return (
 			<div>
 				<button className={isOpen ? "btn btn-dark" : "btn btn-info"} onClick={toggleOpen} > {isOpen ? "Закрыть комментарии" : "Открыть комментарии"} </button>
+				<CommentsForm />
 				<ul>
 					{this.getComments()}
 				</ul>
