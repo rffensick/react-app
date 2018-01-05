@@ -1,0 +1,36 @@
+import React, { Component } from "react";
+import Comment from "./Comments";
+import toggleOpen from "./../../decorators/toggleOpen";
+
+class CommentsList extends Component {
+
+	getComments() {
+		const commentElement = this.props.comments.map((comment) =>
+			<li key={comment.id}>
+				<Comment comment={comment} />
+			</li>
+		);
+		
+		const { isOpen } = this.props;
+
+		if (!isOpen) return null;
+
+		return commentElement;
+	}
+
+	render() {
+		const { isOpen, toggleOpen } = this.props;
+		
+		return (
+			<div>
+				<button className={isOpen ? "btn btn-dark" : "btn btn-info"} onClick={toggleOpen} > {isOpen ? "Закрыть комментарии" : "Открыть комментарии"} </button>
+				<ul>
+					{this.getComments()}
+				</ul>
+			</div>
+		);
+	}
+
+}
+
+export default toggleOpen(CommentsList);
