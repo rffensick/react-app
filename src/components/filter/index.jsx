@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Select from "react-select";
 import 'react-select/dist/react-select.css';
 import { connect } from 'react-redux';
+import { filterArticle } from "./../../AC";
 
 class FilterArticle extends Component {
 
@@ -9,7 +10,9 @@ class FilterArticle extends Component {
     selection: null
   }
 
-  changeSelection = selection => this.setState({ selection });
+  changeSelection = selection => {
+    this.setState({ selection });
+  }
 
   render() {
     const options = this.props.articles.map(article => ({
@@ -35,4 +38,4 @@ class FilterArticle extends Component {
 
 export default connect(state => ({
   articles: state.articles
-}))(FilterArticle);
+}), { filterArticle })(FilterArticle);

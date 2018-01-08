@@ -15,7 +15,7 @@ const limits = {
 export default class CommentsForm extends Component {
 
 	static propTypes = {
-
+		
 	}
 
 	state = {
