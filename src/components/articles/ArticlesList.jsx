@@ -12,7 +12,7 @@ class ArticlesList extends Component {
 	}
 
 	render() {
-		const { openItemId, articles, toggleOpenItem, titleOfArticle } = this.props;
+		const { openItemId, articles, toggleOpenItem } = this.props;
 		const articleElement = articles.map((article) =>
 			<li key={article.id}>
 				<Articles article={article} isOpen={article.id === openItemId} toggleOpen={toggleOpenItem(article.id)} />
