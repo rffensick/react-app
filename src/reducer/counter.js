@@ -1,7 +1,9 @@
+import { INCREMENT } from "./../constants";
+
 export const countReducer = (count = 0, action) => {
   const {type} = action;
   switch (type) {
-    case 'INCREMENT':
+    case INCREMENT:
       return count + 1
     default:
       return count;

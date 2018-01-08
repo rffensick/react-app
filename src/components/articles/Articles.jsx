@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import CommentList from './../comments/CommentsList';
 import { CSSTransitionGroup } from 'react-transition-group';
+import { connect } from 'react-redux'
+import { deleteArticle } from "./../../AC";
 
 class Articles extends Component {
 
@@ -41,13 +43,22 @@ class Articles extends Component {
 		console.log("---", ref);
 	}
 	
+	handleDelete = () => {
+		const { deleteArticle, article } = this.props;
+		deleteArticle(article.id)
+		console.log('delete');
+	}
+
 	render() {
 		const { article, isOpen, toggleOpen } = this.props;
 		console.log("update article");
 		return (
 			<div className='jumbotron' ref={this.setContainerRef} >
 				<h3> Title:  {article.title} </h3>
-				<button className={isOpen ? 'btn btn-danger' : 'btn btn-primary'} onClick={toggleOpen} > {isOpen ? 'Закрыть статью' : 'Открыть статью'} </button>
+				<div className="btn-group">
+					<button className={isOpen ? 'btn btn-danger' : 'btn btn-primary'} onClick={toggleOpen} > {isOpen ? 'Закрыть статью' : 'Открыть статью'} </button>
+					<button onClick={this.handleDelete} className='btn btn-warning' >Удалить статью</button>
+				</div>
 				<CSSTransitionGroup transitionName="article" transitionEnterTimeout={300} transitionLeaveTimeout={500}>
 					{this.getArticle()}
 				</CSSTransitionGroup>
@@ -57,4 +68,5 @@ class Articles extends Component {
 
 }
 
-export default Articles;
+
+export default connect(null, {deleteArticle})(Articles);

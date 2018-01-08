@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import Select from "react-select";
 import 'react-select/dist/react-select.css';
+import { connect } from 'react-redux';
 
-export default class FilterArticle extends Component {
+class FilterArticle extends Component {
 
   state = {
     selection: null
@@ -30,3 +31,8 @@ export default class FilterArticle extends Component {
   }
 
 }
+
+
+export default connect(state => ({
+  articles: state.articles
+}))(FilterArticle);
