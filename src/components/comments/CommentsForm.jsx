@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 const limits = {
 	user: {
@@ -13,10 +12,6 @@ const limits = {
 }
 
 export default class CommentsForm extends Component {
-
-	static propTypes = {
-		
-	}
 
 	state = {
 		user: '',
