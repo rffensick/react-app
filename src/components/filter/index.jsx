@@ -6,16 +6,11 @@ import { filterArticle } from "./../../AC";
 
 class FilterArticle extends Component {
 
-  state = {
-    selection: null
-  }
-
-  changeSelection = selection => {
-    this.setState({ selection });
-  }
+  handleChange = selectedOption => this.props.filterArticle(selectedOption.map(option=>option.value))
 
   render() {
-    const options = this.props.articles.map(article => ({
+    const {selected, articles} = this.props;
+    const options = articles.map(article => ({
       label: article.title,
       value: article.id
     }));
@@ -26,8 +21,8 @@ class FilterArticle extends Component {
           placeholder="Поиск по статьям"
           multi
           options={options}
-          value={this.state.selection}
-          onChange={this.changeSelection}
+          value={selected}
+          onChange={this.handleChange}
         />
       </div>
     );
@@ -37,5 +32,6 @@ class FilterArticle extends Component {
 
 
 export default connect(state => ({
-  articles: state.articles
+  articles: state.articles,
+  selected: state.filterArticles.selected
 }), { filterArticle })(FilterArticle);

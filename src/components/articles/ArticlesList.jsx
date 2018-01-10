@@ -5,7 +5,6 @@ import accordion from "./../../decorators/accordion";
 import { connect } from 'react-redux';
 
 
-
 class ArticlesList extends Component {
 	static propTypes = {
 		// from connect
@@ -13,7 +12,7 @@ class ArticlesList extends Component {
 		// from accordion
 		openItemId: PropTypes.string,
 		toggleOpenItem: PropTypes.func.isRequired
-	}
+	};
 
 	render() {
 		const { openItemId, articles, toggleOpenItem } = this.props;
@@ -32,6 +31,18 @@ class ArticlesList extends Component {
 
 }
 
-export default connect(state => ({
-	articles: state.articles
-}))(accordion(ArticlesList));
+export default connect(({articles, filterArticles}) => {
+	const {selected} = filterArticles;
+
+		if (!selected.length) {
+			return {articles}
+		} else {
+			
+			const filteredArticles = articles.filter(function(article){
+				return selected.includes(article.id);
+			});
+
+			return {articles: filteredArticles}
+		}
+
+})(accordion(ArticlesList));
