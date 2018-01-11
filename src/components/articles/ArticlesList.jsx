@@ -37,12 +37,10 @@ export default connect(({articles, filterArticles}) => {
 		if (!selected.length) {
 			return {articles}
 		} else {
-			
 			const filteredArticles = articles.filter(function(article){
 				return selected.includes(article.id);
 			});
-
+			
 			return {articles: filteredArticles}
 		}
-
 })(accordion(ArticlesList));
