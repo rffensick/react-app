@@ -6,9 +6,9 @@ import CommentsForm from "./CommentsForm";
 class CommentsList extends Component {
 
 	getComments() {
-		const commentElement = this.props.comments.map((comment) =>
-			<li key={comment.id}>
-				<Comment comment={comment} />
+		const commentElement = this.props.comments.map((id) =>
+			<li key={id}>
+				<Comment id={id} />
 			</li>
 		);
 		
