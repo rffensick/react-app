@@ -6,14 +6,14 @@ import { commentSelectorFactory } from './../../selectors'
 
 class Comment extends Component {
 
-	// static propTypes = {
-	// 	id: PropTypes.string.isRequired,
-	// 	// form connect
-	// 	comment: PropTypes.shape({
-	// 		text: PropTypes.string.isRequired,
-	// 		user: PropTypes.string.isRequired,
-	// 	}).isRequired
-	// }
+	static propTypes = {
+		id: PropTypes.string.isRequired,
+		// form connect
+		comment: PropTypes.shape({
+			text: PropTypes.string.isRequired,
+			user: PropTypes.string.isRequired,
+		}).isRequired
+	}
 
 	render() {
 		const { comment } = this.props;
