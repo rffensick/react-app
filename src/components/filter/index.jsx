@@ -3,6 +3,7 @@ import Select from "react-select";
 import 'react-select/dist/react-select.css';
 import { connect } from 'react-redux';
 import { filterArticle } from "./../../AC";
+import { mapToArr } from "./../../helpers";
 
 class FilterArticle extends Component {
 
@@ -30,8 +31,7 @@ class FilterArticle extends Component {
 
 }
 
-
 export default connect(state => ({
-  articles: state.articles,
+  articles: mapToArr(state.articles),
   selected: state.filterArticles.selected
 }), { filterArticle })(FilterArticle);

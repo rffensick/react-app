@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import { mapToArr } from "./../helpers";
 
 const articlesGetter = state => state.articles;
 const filterArticlesGetter = state => state.filterArticles;
@@ -13,10 +14,10 @@ export const filteredArticlesSelector = createSelector(articlesGetter, filterArt
 	const {selected} = filterArticles;
 
 	if (!selected.length) {
-		return {articles}
+		return { articles: mapToArr(articles) }
 	} else {
 		
-		const filteredArticles = articles.filter(function(article){
+		const filteredArticles = mapToArr(articles).filter(function(article){
 			return selected.includes(article.id);
 		});
 

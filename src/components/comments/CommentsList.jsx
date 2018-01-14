@@ -6,13 +6,22 @@ import CommentsForm from "./CommentsForm";
 class CommentsList extends Component {
 
 	getComments() {
-		const commentElement = this.props.comments.map((id) =>
+
+		const { article: { comments = [], id }, isOpen } = this.props;
+
+		if (!comments.length) {
+			return (
+				<li className='end-comment' key={id} >
+					No comments yet!
+				</li>
+			);
+		}
+
+		const commentElement = comments.map((id) =>
 			<li key={id}>
 				<Comment id={id} />
 			</li>
 		);
-		
-		const { isOpen } = this.props;
 
 		if (!isOpen) return null;
 
@@ -21,11 +30,11 @@ class CommentsList extends Component {
 
 	render() {
 		const { isOpen, toggleOpen } = this.props;
-		
+		const { article: {comments = [], id} } = this.props;
 		return (
 			<div>
 				<button className={isOpen ? "btn btn-dark" : "btn btn-info"} onClick={toggleOpen} > {isOpen ? "Закрыть комментарии" : "Открыть комментарии"} </button>
-				<CommentsForm />
+				<CommentsForm articleId = {id} />
 				<ul>
 					{this.getComments()}
 				</ul>

@@ -7,6 +7,10 @@ import { deleteArticle } from "./../../AC";
 
 class Articles extends Component {
 
+	state = {
+		updateIndex: 0
+	}
+
 	static propTypes = {
 		article: PropTypes.shape({
 			id: PropTypes.string.isRequired,
@@ -21,19 +25,10 @@ class Articles extends Component {
 		if (!this.props.isOpen) return null;
 		const {article} = this.props;
 
-		if (!article.comments) return (
-			<div>
-				<section> {article.text} </section>
-					<ul>
-						<li className="end-comment">No comments yet!</li>
-					</ul>
-			</div>
-		);
-
 		return(
 			<div>
 				<section className="article-text" > -- {article.text} </section>
-				<CommentList comments = {article.comments} />
+				<CommentList article = {article} key={this.state.updateIndex} />
 			</div>
 		);
 	}

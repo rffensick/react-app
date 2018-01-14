@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { addComment } from "./../../AC";
 
 const limits = {
 	user: {
@@ -11,7 +13,7 @@ const limits = {
 	}
 }
 
-export default class CommentsForm extends Component {
+class CommentsForm extends Component {
 
 	state = {
 		user: '',
@@ -20,13 +22,14 @@ export default class CommentsForm extends Component {
 
 	handleSubmit = e => {
 		e.preventDefault();
+		this.props.addComment(this.state)
 		this.setState({
 			user: '',
 			text: ''
 		});
 	}
 
-	getClassName = type => this.state[type].length && this.state[type].length < limits[type].min ? 'form-data__error' : '';
+	getClassName = type => this.state[type].length && this.state[type].length < limits[type].min ? 'form-data__error form-control' : 'form-control';
 
 	handleChange = type => e => {
 		const {value} = e.target;
@@ -68,3 +71,8 @@ export default class CommentsForm extends Component {
 	}
 
 }
+
+
+export default connect(null, (dispatch, ownProps) => ({
+	addComment: (comment) => dispatch(addComment(comment, ownProps.articleId))
+}))(CommentsForm);
