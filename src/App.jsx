@@ -10,7 +10,7 @@ export default class App extends Component {
       <div>
         <Counter />
         <FilterArticle articles={[]} />
-        <ArticlesList  />
+        <ArticlesList />
       </div>
     );
   }
