@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import toggleOpen from "./../../decorators/toggleOpen";
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
-import { commentSelectorFactory } from './../../selectors'
+import { commentSelectorFactory } from './../../selectors';
 
 class Comment extends Component {
 
@@ -20,9 +20,9 @@ class Comment extends Component {
 		return (
 			<div>		
 				<section className="comments-text">
-					<h4> User: {comment.user} </h4>
+					<h4> {comment.user} </h4>
 					-- {comment.text}
-					<p className="end-comment">End Comment ;)</p>
+					<hr/>
 				</section>
 			</div>
 		);

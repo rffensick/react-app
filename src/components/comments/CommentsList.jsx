@@ -7,7 +7,7 @@ class CommentsList extends Component {
 
 	getComments() {
 
-		const { article: { comments = [], id }, isOpen } = this.props;
+		const { article: { comments, id }, isOpen } = this.props;
 
 		if (!comments.length) {
 			return (
@@ -30,7 +30,7 @@ class CommentsList extends Component {
 
 	render() {
 		const { isOpen, toggleOpen } = this.props;
-		const { article: {comments = [], id} } = this.props;
+		const { article: {id} } = this.props;
 		return (
 			<div>
 				<button className={isOpen ? "btn btn-dark" : "btn btn-info"} onClick={toggleOpen} > {isOpen ? "Закрыть комментарии" : "Открыть комментарии"} </button>

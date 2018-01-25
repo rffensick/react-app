@@ -1,3 +1,7 @@
+html {
+  font-size: 16px;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -25,6 +29,7 @@ header {
     display: flex;
     flex-direction: column;
     list-style: none;
+    margin-top: 10px;
   }
 }
 
