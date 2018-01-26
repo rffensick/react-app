@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import accordion from "./../../decorators/accordion";
 import { connect } from 'react-redux';
 import { filteredArticlesSelector } from "./../../selectors";
+import { loadAllArticles  } from "../../AC/index";
 
 class ArticlesList extends Component {
 	static propTypes = {
@@ -13,6 +14,11 @@ class ArticlesList extends Component {
 		openItemId: PropTypes.string,
 		toggleOpenItem: PropTypes.func.isRequired
 	};
+
+	componentDidMount() {
+		this.props.loadAllArticles()
+	}
+	
 
 	render() {
 		console.log('render articleList');
@@ -36,4 +42,4 @@ export default connect((state) => {
 
 	return filteredArticlesSelector(state)
 
-})(accordion(ArticlesList));
+}, {loadAllArticles})(accordion(ArticlesList));

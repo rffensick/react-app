@@ -1,10 +1,10 @@
-export function arrToMap(arr) {
-  return arr.reduce((acc, item) => {
-    acc[item.id] = item;
-    return acc;
-  }, {})
+import { Map } from "immutable";
+
+export function arrToMap(arr, dataRecord = Map) {
+  return arr.reduce((acc, item) => 
+    acc.set(item.id, new dataRecord(item)), new Map({}));
 }
 
 export function mapToArr(obj) {
-  return Object.keys(obj).map(id => obj[id]);
+  return obj.valueSeq().toArray()
 }

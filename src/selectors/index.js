@@ -9,8 +9,6 @@ const idGetter = (state, props) => props.id;
 
 export const filteredArticlesSelector = createSelector(articlesGetter, filterArticlesGetter, (articles, filterArticles) => {
 
-	console.log('render filter');
-
 	const {selected} = filterArticles;
 
 	if (!selected.length) {

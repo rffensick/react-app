@@ -33,10 +33,6 @@ class Articles extends Component {
 		);
 	}
 
-	setContainerRef = ref => {
-		this.container = ref;
-		console.log("---", ref);
-	}
 	
 	handleDelete = () => {
 		const { deleteArticle, article } = this.props;
@@ -46,7 +42,6 @@ class Articles extends Component {
 
 	render() {
 		const { article, isOpen, toggleOpen } = this.props;
-		console.log("update article");
 		return (
 			<div className='jumbotron' ref={this.setContainerRef} >
 				<h3> Title:  {article.title} </h3>
