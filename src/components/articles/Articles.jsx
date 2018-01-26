@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import CommentList from './../comments/CommentsList';
 import { CSSTransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux'
-import { deleteArticle } from "./../../AC";
+import { deleteArticle, loadArticle } from "./../../AC";
 
 class Articles extends Component {
 
@@ -11,11 +11,16 @@ class Articles extends Component {
 		updateIndex: 0
 	}
 
+	componentWillReceiveProps({ isOpen, loadArticle, article }) {
+		if (isOpen && !article.text && !article.loading) loadArticle(article.id);
+	}
+	
+
 	static propTypes = {
 		article: PropTypes.shape({
 			id: PropTypes.string.isRequired,
 			title: PropTypes.string.isRequired,
-			text: PropTypes.string.isRequired
+			text: PropTypes.string
 		}).isRequired,
 		isOpen: PropTypes.bool,
 		toggleOpen: PropTypes.func
@@ -27,6 +32,7 @@ class Articles extends Component {
 
 		return(
 			<div>
+				{this.props.article.loading && <h1>Loading...</h1>}
 				<section className="article-text" > -- {article.text} </section>
 				<CommentList article = {article} key={this.state.updateIndex} />
 			</div>
@@ -59,4 +65,4 @@ class Articles extends Component {
 }
 
 
-export default connect(null, {deleteArticle})(Articles);
+export default connect(null, {deleteArticle, loadArticle})(Articles);

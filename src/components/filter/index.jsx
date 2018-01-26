@@ -32,6 +32,6 @@ class FilterArticle extends Component {
 }
 
 export default connect(state => ({
-  articles: mapToArr(state.articles),
+  articles: mapToArr(state.articles.entities),
   selected: state.filterArticles.selected
 }), { filterArticle })(FilterArticle);

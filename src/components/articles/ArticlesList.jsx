@@ -16,21 +16,22 @@ class ArticlesList extends Component {
 	};
 
 	componentDidMount() {
-		this.props.loadAllArticles()
+		const { loaded, loading, loadAllArticles } = this.props;
+		if (!loaded || !loading) loadAllArticles();
 	}
 	
 
 	render() {
 		console.log('render articleList');
-		const { openItemId, articles, toggleOpenItem } = this.props;
+		const { openItemId, articles, toggleOpenItem, loading } = this.props;
 		const articleElement = articles.map((article) =>
 			<li key={article.id}>
 				<Articles article={article} isOpen={article.id === openItemId} toggleOpen={toggleOpenItem(article.id)} />
 			</li>
 		);
-
 		return(
 			<ul>
+				{loading && <h1>Loading...</h1>}
 				{articleElement}
 			</ul>
 		);
@@ -40,6 +41,10 @@ class ArticlesList extends Component {
 
 export default connect((state) => {
 
-	return filteredArticlesSelector(state)
+	return {
+		articles: filteredArticlesSelector(state),
+		loading: state.articles.loading,
+		loaded: state.articles.loaded
+	}
 
 }, {loadAllArticles})(accordion(ArticlesList));
