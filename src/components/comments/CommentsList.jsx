@@ -2,12 +2,20 @@ import React, { Component } from "react";
 import Comment from "./Comments";
 import toggleOpen from "./../../decorators/toggleOpen";
 import CommentsForm from "./CommentsForm";
+import { connect } from "react-redux";
+import { loadArticleComments } from "../../AC";
 
 class CommentsList extends Component {
 
+	componentWillReceiveProps({ isOpen, article, loadArticleComments }) {
+		if (!this.props.isOpen && isOpen && !article.commentsLoading && !article.commentsLoaded) {
+			loadArticleComments(article.id)
+		}
+	}
+
 	getComments() {
 
-		const { article: { comments, id }, isOpen } = this.props;
+		const { article: { comments, id, commentsLoading, commentsLoaded }, isOpen } = this.props;
 
 		if (!comments.length) {
 			return (
@@ -25,6 +33,8 @@ class CommentsList extends Component {
 
 		if (!isOpen) return null;
 
+		if (commentsLoading) return <h1>Loading...</h1>;
+		if (!commentsLoaded) return null;
 		return commentElement;
 	}
 
@@ -44,4 +54,4 @@ class CommentsList extends Component {
 
 }
 
-export default toggleOpen(CommentsList);
+export default connect(null, { loadArticleComments })(toggleOpen(CommentsList));

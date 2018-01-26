@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import accordion from "./../../decorators/accordion";
 import { connect } from 'react-redux';
 import { filteredArticlesSelector } from "./../../selectors";
-import { loadAllArticles  } from "../../AC/index";
+import { loadAllArticles } from "../../AC";
 
 class ArticlesList extends Component {
 	static propTypes = {
@@ -22,7 +22,6 @@ class ArticlesList extends Component {
 	
 
 	render() {
-		console.log('render articleList');
 		const { openItemId, articles, toggleOpenItem, loading } = this.props;
 		const articleElement = articles.map((article) =>
 			<li key={article.id}>
@@ -47,4 +46,4 @@ export default connect((state) => {
 		loaded: state.articles.loaded
 	}
 
-}, {loadAllArticles})(accordion(ArticlesList));
+}, { loadAllArticles })(accordion(ArticlesList));

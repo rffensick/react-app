@@ -1,4 +1,4 @@
-import { INCREMENT, DELETE_ARTICLE, CHANGE_SELECTION, ADD_COMMENT, LOAD_ALL_ARTICLES, LOAD_ARTICLE, START, SUCCESS, FAIL } from "./../constants";
+import { INCREMENT, DELETE_ARTICLE, CHANGE_SELECTION, ADD_COMMENT, LOAD_ALL_ARTICLES, LOAD_ARTICLE, START, SUCCESS, FAIL, LOAD_COMMENT } from "./../constants";
 
 export function increment() {
 	return {
@@ -37,7 +37,7 @@ export function addComment(comment, articleId) {
 export function loadAllArticles() {
 	return {
 		type: LOAD_ALL_ARTICLES,
-		callApi: '/api/article'
+		callAPI: '/api/article'
 	}
 }
 
@@ -61,10 +61,18 @@ export function loadArticle(id) {
 	}
 }
 
-// export function loadArticle(id) {
+// export function loadArticleComments(articleId) {
 // 	return {
-// 		type: LOAD_ARTICLE,
-// 		callApi: `/api/article/${id}`
+// 		type: LOAD_COMMENT,
+// 		payload: { articleId },
+// 		callApi: `/api/comment?article=${articleId}`
 // 	}
 // }
 
+export function loadArticleComments(articleId) {
+	return {
+		type: LOAD_COMMENT,
+		payload: { articleId },
+		callAPI: `/api/comment?article=${articleId}`
+	}
+}

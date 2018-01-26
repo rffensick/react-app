@@ -7,6 +7,8 @@ export const INCREMENT = 'INCREMENT';
 export const CHANGE_SELECTION = 'CHANGE_SELECTION';
 
 export const ADD_COMMENT = 'ADD_COMMENT';
+export const LOAD_COMMENT = 'LOAD_COMMENT';
+
 
 export const START 		= '_START';
 export const SUCCESS 	= '_SUCCESS';
