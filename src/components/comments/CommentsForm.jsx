@@ -90,7 +90,7 @@ class CommentsForm extends Component {
 				</FormField>
 
 				<Button primary animated>
-					<Button.Content visible>Добавить коментарий</Button.Content>
+					<Button.Content visible>Добавить комментарий</Button.Content>
 					<Button.Content hidden>
 						<Icon name='comment' />
 					</Button.Content>

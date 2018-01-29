@@ -39,11 +39,9 @@ class ArticlesList extends Component {
 }
 
 export default connect((state) => {
-
 	return {
 		articles: filteredArticlesSelector(state),
 		loading: state.articles.loading,
 		loaded: state.articles.loaded
 	}
-
 }, { loadAllArticles })(accordion(ArticlesList));
