@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import ArticlesList from './components/articles/ArticlesList';
+import ArticlesRoute from './route/ArticleRoute';
 import FilterArticle from "./components/filter";
-import {HashRouter as Router, Route, NavLink} from "react-router-dom";
+import {BrowserRouter as Router, Route, NavLink} from "react-router-dom";
 
 export default class App extends Component {
 
@@ -18,7 +18,7 @@ export default class App extends Component {
                 <NavLink activeStyle={{ fontWeight: 'bold' }} to='/search'>Search</NavLink>
               </li>
             </ul>
-            <Route path='/articles' component={ArticlesList} />
+            <Route path='/articles' component={ArticlesRoute} />
             <Route path='/search' component={FilterArticle} />
           </Fragment>
         </Router>

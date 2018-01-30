@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import Articles from "./Articles";
 import PropTypes from "prop-types";
-import accordion from "./../../decorators/accordion";
 import { connect } from 'react-redux';
 import { filteredArticlesSelector } from "./../../selectors";
 import { loadAllArticles } from "../../AC";
-import { NavLink, Route } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 class ArticlesList extends Component {
 	static propTypes = {
@@ -13,7 +11,7 @@ class ArticlesList extends Component {
 		articles: PropTypes.array.isRequired,
 		// from accordion
 		openItemId: PropTypes.string,
-		toggleOpenItem: PropTypes.func.isRequired
+		toggleOpenItem: PropTypes.func
 	};
 
 	componentDidMount() {
@@ -23,7 +21,7 @@ class ArticlesList extends Component {
 	
 
 	render() {
-		const { openItemId, articles, toggleOpenItem, loading } = this.props;
+		const { articles, loading } = this.props;
 		const articleElement = articles.map((article) =>
 			<li key={article.id}>
 				<NavLink exact to={`/articles/${article.id}`} activeStyle={{color: 'red'}} >
@@ -36,7 +34,6 @@ class ArticlesList extends Component {
 			<ul>
 				{loading && <h1>Loading...</h1>}
 				{articleElement}
-				<Route path="/articles/:id" component={Articles} />
 			</ul>
 		);
 	}
@@ -49,4 +46,4 @@ export default connect((state) => {
 		loading: state.articles.loading,
 		loaded: state.articles.loaded
 	}
-}, { loadAllArticles })(accordion(ArticlesList));
+}, { loadAllArticles })(ArticlesList);

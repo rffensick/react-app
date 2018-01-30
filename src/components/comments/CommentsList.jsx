@@ -15,7 +15,9 @@ class CommentsList extends Component {
 
 	getComments() {
 
-		const { article: { comments, id, commentsLoading, commentsLoaded }, isOpen } = this.props;
+		const { article: { comments, id, commentsLoading, commentsLoaded }, isOpen, article } = this.props;
+
+		if (!comments) return <h1>Loading...</h1>;
 
 		if (!comments.length) {
 			return (

@@ -8,20 +8,23 @@ import { deleteArticle, loadArticle } from "./../../AC";
 class Articles extends Component {
 
 	state = {
-		updateIndex: 0
+		updateIndex: 0,
 	}
 
-	componentWillReceiveProps({ isOpen, loadArticle, article }) {
-		if (isOpen && !article.text && !article.loading) loadArticle(article.id);
+	componentDidMount() {
+		const { article, id, loadArticle } = this.props;
+		if (!article || (!article.text && !article.loading)) loadArticle(id);
 	}
 	
 
 	static propTypes = {
+		id: PropTypes.string.isRequired,
+		//form connect
 		article: PropTypes.shape({
-			id: PropTypes.string.isRequired,
-			title: PropTypes.string.isRequired,
+			id: PropTypes.string,
+			title: PropTypes.string,
 			text: PropTypes.string
-		}).isRequired,
+		}),
 		isOpen: PropTypes.bool,
 		toggleOpen: PropTypes.func
 	}
@@ -48,6 +51,7 @@ class Articles extends Component {
 
 	render() {
 		const { article, isOpen, toggleOpen } = this.props;
+		if (!article) return null;
 		return (
 			<div className='jumbotron' ref={this.setContainerRef} >
 				<h3> Title:  {article.title} </h3>
@@ -55,7 +59,7 @@ class Articles extends Component {
 					<button className={isOpen ? 'btn btn-danger' : 'btn btn-primary'} onClick={toggleOpen} > {isOpen ? 'Закрыть статью' : 'Открыть статью'} </button>
 					<button onClick={this.handleDelete} className='btn btn-warning' >Удалить статью</button>
 				</div>
-				<CSSTransitionGroup transitionName="article" transitionEnterTimeout={300} transitionLeaveTimeout={500}>
+				<CSSTransitionGroup transitionName="article" transitionEnterTimeout={300} transitionLeaveTimeout={300}>
 					{this.getArticle()}
 				</CSSTransitionGroup>
 			</div>
@@ -65,4 +69,6 @@ class Articles extends Component {
 }
 
 
-export default connect(null, {deleteArticle, loadArticle})(Articles);
+export default connect((state, ownProps) => ({
+	article: state.articles.entities.get(ownProps.id)
+}), {deleteArticle, loadArticle})(Articles);
