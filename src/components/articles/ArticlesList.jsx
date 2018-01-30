@@ -5,6 +5,7 @@ import accordion from "./../../decorators/accordion";
 import { connect } from 'react-redux';
 import { filteredArticlesSelector } from "./../../selectors";
 import { loadAllArticles } from "../../AC";
+import { NavLink, Route } from "react-router-dom";
 
 class ArticlesList extends Component {
 	static propTypes = {
@@ -17,7 +18,7 @@ class ArticlesList extends Component {
 
 	componentDidMount() {
 		const { loaded, loading, loadAllArticles } = this.props;
-		if (!loaded || !loading) loadAllArticles();
+		if (!loaded && !loading) loadAllArticles();
 	}
 	
 
@@ -25,13 +26,17 @@ class ArticlesList extends Component {
 		const { openItemId, articles, toggleOpenItem, loading } = this.props;
 		const articleElement = articles.map((article) =>
 			<li key={article.id}>
-				<Articles article={article} isOpen={article.id === openItemId} toggleOpen={toggleOpenItem(article.id)} />
+				<NavLink exact to={`/articles/${article.id}`} activeStyle={{color: 'red'}} >
+					{article.title}
+				</NavLink>
+				{/* <Articles article={article} isOpen={article.id === openItemId} toggleOpen={toggleOpenItem(article.id)} /> */}
 			</li>
 		);
 		return(
 			<ul>
 				{loading && <h1>Loading...</h1>}
 				{articleElement}
+				<Route path="/articles/:id" component={Articles} />
 			</ul>
 		);
 	}
