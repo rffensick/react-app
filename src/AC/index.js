@@ -1,4 +1,5 @@
 import { INCREMENT, DELETE_ARTICLE, CHANGE_SELECTION, ADD_COMMENT, LOAD_ALL_ARTICLES, LOAD_ARTICLE, START, SUCCESS, FAIL, LOAD_COMMENT, LOAD_COMMENTS_FOR_PAGE } from "./../constants";
+import { push } from "react-router-redux";
 
 export function increment() {
 	return {
@@ -49,25 +50,25 @@ export function loadArticle(id) {
 		})
 
 		fetch(`/api/article/${id}`)
-			.then(res => res.json())
+			.then(res => {
+				if (res.status >= 400) {
+					throw new Error(res.statusText)
+				}
+				return res.json()
+			})
 			.then(response => dispatch({
 				type: LOAD_ARTICLE + SUCCESS,
 				payload: { id, response }
 			}))
-			.catch(err => dispatch({
-				type: LOAD_ARTICLE + FAIL,
-				payload: { id, err }
-			}))
+			.catch(err => {
+				dispatch({
+					type: LOAD_ARTICLE + FAIL,
+					payload: { id, err }
+				})
+				dispatch(push('/articles'))
+			})
 	}
 }
-
-// export function loadArticleComments(articleId) {
-// 	return {
-// 		type: LOAD_COMMENT,
-// 		payload: { articleId },
-// 		callApi: `/api/comment?article=${articleId}`
-// 	}
-// }
 
 export function loadArticleComments(articleId) {
 	return {
@@ -79,6 +80,7 @@ export function loadArticleComments(articleId) {
 
 export function checkAndLoadCommentsForPage(page) {
 	return (dispatch, getState) => {
+		console.log(getState());
 		const { comments: { pagination } } = getState()
 		if (pagination.getIn([page, 'loading']) || pagination.getIn([page, 'ids'])) return
 
