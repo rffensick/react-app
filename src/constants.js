@@ -8,6 +8,7 @@ export const CHANGE_SELECTION = 'CHANGE_SELECTION';
 
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const LOAD_COMMENT = 'LOAD_COMMENT';
+export const LOAD_COMMENTS_FOR_PAGE = 'LOAD_COMMENTS_FOR_PAGE';
 
 
 export const START 		= '_START';

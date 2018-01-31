@@ -24,10 +24,9 @@ class ArticlesList extends Component {
 		const { articles, loading } = this.props;
 		const articleElement = articles.map((article) =>
 			<li key={article.id}>
-				<NavLink exact to={`/articles/${article.id}`} activeStyle={{color: 'red'}} >
+				<NavLink key={article.id} to={`/articles/${article.id}`} activeStyle={{fontWeight: 'bold'}} >
 					{article.title}
 				</NavLink>
-				{/* <Articles article={article} isOpen={article.id === openItemId} toggleOpen={toggleOpenItem(article.id)} /> */}
 			</li>
 		);
 		return(
