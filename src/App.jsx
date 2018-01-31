@@ -22,6 +22,9 @@ export default class App extends Component {
                 <li>
                   <NavLink activeStyle={{ fontWeight: 'bold' }} to='/search'>Search</NavLink>
                 </li>
+                <li>
+                  <NavLink activeStyle={{ fontWeight: 'bold' }} to='/comments/1'>All Comments</NavLink>
+                </li>
             </ul>
             <Switch>
               <Route path='/articles/new/' component={AddArticle} />

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { checkAndLoadCommentsForPage } from "../../AC";
 import { NavLink } from "react-router-dom";
 import Comments from "./Comments";
-import { Pagination } from "semantic-ui-react";
 
 class CommentsPagination extends Component {
 
@@ -28,8 +27,6 @@ class CommentsPagination extends Component {
 		for (let i = 1; i <= Math.floor((total - 1) / 5) + 1; i++) {
 			items.push( <li key={i} ><NavLink to={`/comments/${i}`} activeStyle={{fontWeight: 'bold'}} >{i}</NavLink> </li> )
 		}
-
-		console.log(items);
 
 		return <ul>{items}</ul>;
 	}

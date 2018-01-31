@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import ArticlesList from '../components/articles/ArticlesList';
 import Articles from "../components/articles/Articles";
 import { Route } from 'react-router-dom';
 
 export default class ArticlesRoute extends Component {
-	static propTypes = {
-		
-	}
 
 	getArticle = ({match}) => {
 		const { id } = match.params;
